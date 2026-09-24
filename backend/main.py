@@ -1,5 +1,5 @@
 """
-HeathBuddy – FastAPI backend
+Health Buddy – FastAPI backend
 Simple school-project version:
 - Chat endpoint that accepts text or file uploads
 - Soft rate limiting (in-memory, resets daily)
@@ -15,7 +15,6 @@ from typing import Optional
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
-from fastapi.staticfiles import StaticFiles
 from pypdf import PdfReader
 from PIL import Image
 import pytesseract
@@ -34,7 +33,7 @@ _rate_counter = {"date": str(date.today()), "count": 0}
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 
 app = FastAPI(
-    title="HeathBuddy",
+    title="Health Buddy",
     description="Simple Health Claim Fact-Checker Engine (school project)",
     version="1.0.0",
 )
@@ -132,7 +131,7 @@ async def health():
 @app.get("/api/status")
 async def api_status():
     return {
-        "message": "HeathBuddy API is running",
+        "message": "Health Buddy API is running",
         "daily_limit": DAILY_LIMIT,
         "claims_used_today": _rate_counter["count"],
     }
