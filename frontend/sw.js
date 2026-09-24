@@ -1,5 +1,5 @@
-// Minimal service worker so the app can be installed as a PWA
-const CACHE_NAME = "heathbuddy-v1";
+/* Health Buddy service worker */
+const CACHE_NAME = "healthbuddy-v1";
 const ASSETS = [
   "./",
   "./index.html",
@@ -20,8 +20,8 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  if (event.request.url.includes("/check") || event.request.url.includes(":8000")) {
-    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+  if (event.request.url.includes("/check") || event.request.method !== "GET") {
+    event.respondWith(fetch(event.request));
     return;
   }
   event.respondWith(

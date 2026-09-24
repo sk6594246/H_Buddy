@@ -1,11 +1,11 @@
 {
-  "name": "HeathBuddy",
-  "short_name": "HeathBuddy",
-  "description": "Simple health claim fact-checker for learning",
+  "name": "Health Buddy",
+  "short_name": "Health Buddy",
+  "description": "Calm health-claim fact-checker for families",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f0fdfa",
-  "theme_color": "#0d9488",
+  "background_color": "#f3efe8",
+  "theme_color": "#1f4f43",
   "orientation": "portrait",
   "icons": [
     {

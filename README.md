@@ -1,4 +1,4 @@
-# HeathBuddy (H_Buddy)
+# Health Buddy (H_Buddy)
 
 Simple **Health Claim Fact-Checker** – FastAPI backend + Progressive Web App frontend.  
 Built as a school / lower-secondary project: no database, simple RAG (FAISS), free Groq LLM.
@@ -6,11 +6,12 @@ Built as a school / lower-secondary project: no database, simple RAG (FAISS), fr
 **Live repo:** https://github.com/sk6594246/H_Buddy
 
 ## Features
-- Chat UI with dark mode, example chips, history panel
-- Upload PDF / image (OCR) or use microphone
+- Calm chat-style UI with paper aesthetic, example chips, local history
+- Upload PDF / image (OCR) or paste text
 - RAG over a small curated medical corpus
 - Structured verdicts (VERIFIED TRUE → VERIFIED FALSE)
-- Rate limit (default 4/day, configurable)
+- “Copy for family chat” + JSON export
+- Soft rate limit (default 4/day, configurable)
 - Single process serves both API + frontend (easy deploy)
 
 ## Project structure
@@ -19,10 +20,10 @@ H_Buddy/
 ├── backend/
 │   ├── main.py          # FastAPI + static frontend serving
 │   ├── rag.py           # FAISS RAG
-│   ├── llm.py           # Groq-compatible LLM
+│   ├── llm.py           # Groq LLM (llama-3.1-8b-instant)
 │   ├── corpus/          # .txt medical facts
 │   └── requirements.txt
-├── frontend/            # PWA (html/css/js)
+├── frontend/            # PWA (html / css / js)
 ├── .gitignore
 └── README.md
 ```
@@ -44,6 +45,17 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 Open http://127.0.0.1:8000
 
 Optional OCR: install system Tesseract (`apt install tesseract-ocr` / `brew install tesseract`).
+
+## Which AI is used & how to activate
+
+| Item | Value |
+|------|--------|
+| Provider | **Groq** (free tier) |
+| Model | `llama-3.1-8b-instant` |
+| Key | `GROQ_API_KEY` environment variable |
+| Get key | https://console.groq.com → create API key |
+
+Without the key the app still runs and returns a safe “UNVERIFIED / MIXED” fallback.
 
 ## Deploy (recommended: Render)
 
