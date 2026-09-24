@@ -1,5 +1,5 @@
 """
-LLM wrapper for HeathBuddy.
+LLM wrapper for Health Buddy.
 Uses a free Groq-compatible API (set GROQ_API_KEY environment variable).
 Forces the model to return the exact JSON schema required by the project.
 """
@@ -18,7 +18,7 @@ GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 MODEL_NAME = "llama-3.1-8b-instant"  # fast & free-tier friendly
 
 
-SYSTEM_PROMPT = """You are HeathBuddy, a careful medical fact-checking assistant.
+SYSTEM_PROMPT = """You are Health Buddy, a careful medical fact-checking assistant.
 You MUST follow these rules exactly:
 
 1. Base every answer ONLY on the provided retrieved evidence and well-established public health consensus (WHO, CDC, NHS).
@@ -36,7 +36,7 @@ You MUST follow these rules exactly:
   "verdict": "<one of the five tags>",
   "confidence_score": <float between 0.0 and 1.0>,
   "summary": "<1-2 sentence explanation suitable for messaging apps>",
-  "detailed_breakdown": "<bullet points explaining the science, why people believe the claim, and the factual reality>",
+  "detailed_breakdown": ["<bullet 1>", "<bullet 2>", "..."],
   "trusted_sources": [
     {
       "organization": "<name>",
@@ -104,11 +104,11 @@ def _fallback_response(claim: str, reason: str) -> Dict[str, Any]:
         "verdict": "UNVERIFIED / MIXED",
         "confidence_score": 0.3,
         "summary": f"Could not fully verify this claim right now ({reason}). Please try again later or consult a trusted health source.",
-        "detailed_breakdown": (
-            f"- The system could not reach the language model.\n"
-            f"- Reason: {reason}\n"
-            "- Please check official sources such as WHO or CDC for the most reliable information."
-        ),
+        "detailed_breakdown": [
+            "The system could not reach the language model.",
+            f"Reason: {reason}",
+            "Please check official sources such as WHO or CDC for the most reliable information.",
+        ],
         "trusted_sources": [
             {
                 "organization": "World Health Organization",
