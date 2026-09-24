@@ -52,7 +52,6 @@ async def check_claim(claim: str):
         breakdown = [b.strip() for b in breakdown.split("\n") if b.strip()]
     sources = result.get("trusted_sources", [])
 
-    # Build nice HTML card
     bullets = "".join(f"<li>{b}</li>" for b in breakdown)
     source_lines = ""
     for s in sources:
@@ -83,7 +82,6 @@ async def check_claim(claim: str):
     </div>
     """
 
-    # Plain text version for easy copy
     plain = f"""Health Buddy verdict: {verdict}
 Claim: “{claim}”
 
@@ -110,19 +108,18 @@ with gr.Blocks(title="Health Buddy") as demo:
         """
     )
 
-    with gr.Row():
-        claim_box = gr.Textbox(
-            label="Health claim",
-            placeholder="Paste a claim — a text from a relative, a post, a headline…",
-            lines=4,
-            max_lines=8,
-        )
+    claim_box = gr.Textbox(
+        label="Health claim",
+        placeholder="Paste a claim — a text from a relative, a post, a headline…",
+        lines=4,
+        max_lines=8,
+    )
 
     with gr.Row():
-        check_btn = gr.Button("Check this claim", variant="primary", scale=1)
-        clear_btn = gr.Button("Clear", scale=0)
+        check_btn = gr.Button("Check this claim", variant="primary")
+        clear_btn = gr.Button("Clear")
 
-    examples = gr.Examples(
+    gr.Examples(
         examples=[[c] for c in EXAMPLE_CLAIMS],
         inputs=claim_box,
         label="Try an example",
@@ -154,9 +151,7 @@ with gr.Blocks(title="Health Buddy") as demo:
         """
     )
 
-
+# Hugging Face Spaces will call launch() for us.
+# Only launch locally when running this file directly.
 if __name__ == "__main__":
-    demo.queue().launch(
-        theme=gr.themes.Soft(primary_hue="teal", neutral_hue="stone"),
-        css=".gradio-container { max-width: 820px !important; }",
-    )
+    demo.queue().launch()
