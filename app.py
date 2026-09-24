@@ -102,13 +102,7 @@ Why this verdict:
     return html, plain
 
 
-with gr.Blocks(
-    title="Health Buddy",
-    theme=gr.themes.Soft(primary_hue="teal", neutral_hue="stone"),
-    css="""
-    .gradio-container { max-width: 820px !important; }
-    """
-) as demo:
+with gr.Blocks(title="Health Buddy") as demo:
     gr.Markdown(
         """
         # 🩺 Health Buddy
@@ -139,7 +133,6 @@ with gr.Blocks(
         label="Copy for family chat",
         lines=10,
         interactive=False,
-        show_copy_button=True,
     )
 
     check_btn.click(
@@ -163,4 +156,7 @@ with gr.Blocks(
 
 
 if __name__ == "__main__":
-    demo.queue().launch()
+    demo.queue().launch(
+        theme=gr.themes.Soft(primary_hue="teal", neutral_hue="stone"),
+        css=".gradio-container { max-width: 820px !important; }",
+    )
