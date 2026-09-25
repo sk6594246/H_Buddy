@@ -1,42 +1,18 @@
----
-title: Health Buddy
-emoji: 🩺
-colorFrom: green
-colorTo: gray
-sdk: gradio
-sdk_version: 4.44.0
-app_file: app.py
-pinned: false
-license: mit
----
+# Health Buddy (H_Buddy)
 
-# Health Buddy
+Family health-claim fact-checker.
 
-Simple **Health Claim Fact-Checker** for families.  
-Paste a health claim → get a calm, cited verdict (educational use only).
+- **Live backend (Gradio):** https://huggingface.co/spaces/sk6594246/Healthbuddy  
+- **PWA (GitHub Pages):** enable Pages → Deploy from branch → `/docs`
 
-**Live repo:** https://github.com/sk6594246/H_Buddy
+## Pure PWA
 
-## Features
-- Gradio UI (free on Hugging Face Spaces)
-- RAG over a small curated medical corpus
-- Structured verdicts (VERIFIED TRUE → VERIFIED FALSE)
-- “Copy for family chat” text
-- Powered by free Groq LLM (`llama-3.1-8b-instant`)
+Static files live in `docs/` (and mirrored under `frontend/`).
 
-## Required secret
-In the Space → **Settings** → **Variables and secrets** add:
+Default API base in the PWA: `https://sk6594246-healthbuddy.hf.space` (Gradio `/check_claim`).
 
-```
-GROQ_API_KEY = your_key_from_console.groq.com
-```
+## Local Gradio
 
-Optional:
-```
-DAILY_LIMIT = 10
-```
-
-## Local run
 ```bash
 pip install -r requirements.txt
 export GROQ_API_KEY=your_key
@@ -44,7 +20,5 @@ python app.py
 ```
 
 ## Disclaimer
-Educational use only. Not a substitute for professional medical advice.
 
-## License
-MIT
+Educational use only. Not a substitute for professional medical advice.
